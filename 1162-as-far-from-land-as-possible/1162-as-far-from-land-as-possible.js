@@ -10,7 +10,10 @@ Constr/Edge - If no land or water exists in the grid, return -1
 
 Pseudo - 
 1 - loop through grid
-2 - if num is 1 skip it, if 0 calculate distance nearest land and save in obj and update new max
+2 - push each land coordinate with distance into a queue
+3 - use bfs while loop and reassign max distance
+4 - shift off first part of queue and iterate over each direction
+5 - if next cell is inbounds and in water, push into queue and assign cell as visited
 */
 var maxDistance = function(grid) {
    const n = grid.length;
