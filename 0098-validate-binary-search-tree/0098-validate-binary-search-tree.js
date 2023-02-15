@@ -16,27 +16,38 @@ Input - the root of binary tree
 Output - a boolean representing if the tree is a true bst
 Constr/Edge - no null inputs and account for negative node values
 Pseudo - 
-1 - traverse tree using a in order dfs
-2 - check in place if left parent right are in ascending order
+1 - make a recursive func
+2 - check if node value is in between range of min max
+3 - if it is then recurse down each side, passing in the max then the min accordingly
+4 - return true if you break out of recursive func
 */
 var isValidBST = function(root) {
-  let maybeSorted = [];
   
-  const inOrderDfs = (node) => {
-    if (!node) return;
+  const recurse = (node, min, max) => {
+    if (node === null) return true;
     
-    inOrderDfs(node.left);
-    maybeSorted.push(node);
-    inOrderDfs(node.right);
-  }
-  inOrderDfs(root);
-  
-  for (let i = 0; i < maybeSorted.length - 1; i++) {
-    let current = maybeSorted[i];
-    let next = maybeSorted[i + 1];
+    if (node.val >= max || node.val <= min) return false;
     
-    if (current.val >= next.val) return false
+    return recurse(node.left, min, node.val) && recurse(node.right, node.val, max);
   }
+  return recurse(root, -Infinity, Infinity)
+//   let maybeSorted = [];
   
-  return true;
+//   const inOrderDfs = (node) => {
+//     if (!node) return;
+    
+//     inOrderDfs(node.left);
+//     maybeSorted.push(node);
+//     inOrderDfs(node.right);
+//   }
+//   inOrderDfs(root);
+  
+//   for (let i = 0; i < maybeSorted.length - 1; i++) {
+//     let current = maybeSorted[i];
+//     let next = maybeSorted[i + 1];
+    
+//     if (current.val >= next.val) return false
+//   }
+  
+//   return true;
 };
