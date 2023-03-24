@@ -14,11 +14,13 @@ Plan -
 - keep track of running sum of cost
 */
 var minimumCost = function(cost) {
-  let sorted = cost.sort((a, b) => b - a);
+  cost = cost.sort((a, b) => b - a);
   let sum = 0;
-  for (let i = 0; i < sorted.length; i+=3) {
-    let combo = [sorted[i], sorted[i+1] || 0, sorted[i+2] || 0];
+  for (let i = 0; i < cost.length; i+=3) {
+    let combo = [cost[i], cost[i+1] || 0, cost[i+2] || 0];
     sum += combo[0] + combo[1];
   }
   return sum;
 };
+
+// O(nlog(n)) + O(n / 3) = O(n log n + n / 3) 
