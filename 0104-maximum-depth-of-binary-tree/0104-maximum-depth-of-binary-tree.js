@@ -13,27 +13,26 @@
 
 /*
 Input - root of binary tree
-Output - return max depth of the tree from root to farthest leaf
-Constr/Edge - 
-Pseudo - 
-1 - do a maxdepth search on the tree
-2 - increment the level
-3 - return the max level
+Output - the number of nodes, along the longest path from root node to farthest leaf node
+Constr/Edge - no empty inputs
+Plan - 
+- keep track of maxDepth in int var
+- use bfs to traverse tree, keep track of current level
+  - if node null return
+  - assign maxDepth to the max between maxDepth and level
+  - recurse down each node, incrementing the level
+-return maxDepth
 */
 var maxDepth = function(root) {
   let max = 0;
-  if (!root) return 0;
   
-  const maxDepth = (node) => {
-    if (!node) return 0;
+  const bfs = (node, level) => {
+    if (!node) return;
+    max = Math.max(max, level);
     
-    let lDepth = maxDepth(node.left);
-    let rDepth = maxDepth(node.right);
-    max = Math.max(lDepth, rDepth);
-    
-    return Math.max(lDepth, rDepth) + 1
+    bfs(node.left, level + 1);
+    bfs(node.right, level + 1);
   }
-  maxDepth(root);
-  return max + 1;
-  
+  bfs(root, 1);
+  return max;
 };
