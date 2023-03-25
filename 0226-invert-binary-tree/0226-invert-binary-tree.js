@@ -12,27 +12,17 @@
  */
 
 /*
-Input - the root of binary tree
-Output - the root of the inverted binary tree
-Constr/Edge - node value can be negative, empty root return empty root
-
-Pseudo - 
-1 - recurse down each node
-2 - swap at each level
+Input - root of binary tree
+Output - the root of inverted binary tree
+Constr/Edge - empty tree returns empty array
+Plan - 
+- swap left and right recursively, starting with root
+- return once null nodes found
 */
 var invertTree = function(root) {
-  
-  const reverseNodes = (node) => {
-    if (!node) return;
-    
-    reverseNodes(node.left);
-    reverseNodes(node.right);
-    
-    let hold = node.left;
-    node.left = node.right;
-    node.right = hold;
-  }
-  reverseNodes(root);
+   if (root) {
+     [root.left, root.right] = [invertTree(root.right), invertTree(root.left)];
+   }
   
   return root;
 };
