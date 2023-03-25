@@ -13,26 +13,29 @@
 
 /*
 Input - root of binary tree
-Output - a boolean representing if the tree is height balanced
-Pseudo -
-1 - use dfs to search tree
-2 - set a left and right variable equal to a recursive call
-3 - compare left and right heights
-4 - return the max of left and right incremented
+Output - a boolean representing if tree is height balanced
+Constr/Edge - empty tree returns true
+Plan - 
+- traverse tree
+  - keep track of height of left side and right side seperately
+  - if the difference between heights is greater than 1 return false else true
 */
 var isBalanced = function(root) {
   let result = true;
+  
+  const traverse = (node) => {
+    if (!node) {
+      return 0;
+    }
+    let leftHeight = traverse(node.left);
+    let rightHeight = traverse(node.right);  
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      result = false;
+    }
     
-  const dfs = (node) => {
-    if (!node) return 0;
-    
-   let left = dfs(node.left);
-   let right = dfs(node.right);
-    
-    if (Math.abs(left - right) > 1) result = false;
-    
-    return Math.max(left, right) + 1;
+    return 1 + Math.max(leftHeight, rightHeight)
   }
-  dfs(root);
+  
+  traverse(root, 1)
   return result;
 };
