@@ -18,7 +18,6 @@ var twoSum = function(nums, target) {
   const indexObj = {};
   for (let i = 0; i < nums.length; i++) {
     let difference = target - nums[i];
-    console.log(indexObj[difference])
     if (indexObj[difference] !== undefined) {
       return [indexObj[difference], i];
     } else {
