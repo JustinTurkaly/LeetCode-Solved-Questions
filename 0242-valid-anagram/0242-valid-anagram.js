@@ -22,7 +22,7 @@ var isAnagram = function(s, t) {
   const freqObj = s.split('').reduce((freq, char) => {
     freq[char] = freq[char] ? freq[char] + 1 : 1;
     return freq;
-  }, {});
+  }, {})
   
   for (let i = 0; i < t.length; i++) {
     if (!freqObj[t[i]]) return false;
