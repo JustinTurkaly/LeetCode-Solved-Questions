@@ -21,7 +21,14 @@ var floodFill = function(image, sr, sc, color) {
   const original = image[sr][sc];
   
   const traverse = (image, sr, sc) => {
-    if (sr < 0 || sr > image.length - 1 || sc < 0 || sc > image[0].length - 1 || image[sr][sc] !== original || image[sr][sc] === color) return image;
+    if (sr < 0 ||
+        sr > image.length - 1 ||
+        sc < 0 ||
+        sc > image[0].length - 1 ||
+        image[sr][sc] !== original ||
+        image[sr][sc] === color) {
+      return image;
+    }
     
     image[sr][sc] = color;
     
