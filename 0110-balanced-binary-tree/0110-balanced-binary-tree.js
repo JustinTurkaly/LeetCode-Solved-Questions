@@ -12,30 +12,31 @@
  */
 
 /*
-Input - root of binary tree
-Output - a boolean representing if tree is height balanced
+Input - root binary tree
+Output - a boolean representing if tree is height balanced (dif in depth of left and right subtree < 2)
 Constr/Edge - empty tree returns true
 Plan - 
-- traverse tree
-  - keep track of height of left side and right side seperately
-  - if the difference between heights is greater than 1 return false else true
+- if root.length === 0 return true
+- traverse down tree
+  - assign left and right variable to recursive calls
+  - if difference in height is greater than 1 return false
+- return true
 */
 var isBalanced = function(root) {
-  let result = true;
+  let res = true;
   
-  const traverse = (node) => {
-    if (!node) {
-      return 0;
-    }
-    let leftHeight = traverse(node.left);
-    let rightHeight = traverse(node.right);  
-    if (Math.abs(leftHeight - rightHeight) > 1) {
-      result = false;
-    }
+  const maxDepth = (node, level) => {
+    if (!node) return 0;
     
-    return 1 + Math.max(leftHeight, rightHeight)
+    let left = maxDepth(node.left);
+    let right = maxDepth(node.right);
+    
+    if (Math.abs(left - right) > 1) res = false;
+    
+    return 1 + Math.max(left, right);
   }
   
-  traverse(root, 1)
-  return result;
+  maxDepth(root, 1);
+  
+  return res;
 };
