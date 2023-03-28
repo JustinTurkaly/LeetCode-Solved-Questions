@@ -15,13 +15,8 @@ Plan -
 var isPalindrome = function(s) {
   temp = s.replace(/[^a-zA-Z0-9]/g, ''); // Remove all non-alphabetic characters
   formatted = temp.toLowerCase(); // Convert all alphabetic characters to lowercase
-  console.log(formatted)
-  let flag = formatted.length % 2 === 0;
-  
-  let mid = Math.floor(formatted.length / 2);
-  let firstHalf = formatted.substring(0, mid);
-  let secondHalf = flag ? formatted.substring(mid) : formatted.substring(mid + 1)
-  let reversedHalf = secondHalf.split('').reverse().join('');
-  return firstHalf === reversedHalf;
+
+  let reversed = formatted.split('').reverse().join('');
+  return formatted === reversed;
   
 };
