@@ -13,9 +13,10 @@ Plan -
 - reverse the second string and compare it to first string
 */
 var isPalindrome = function(s) {
-  temp = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 
-  let reversed = temp.split('').reverse().join('');
-  return temp === reversed;
+  
+  let formatted = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  let reversed = formatted.split('').reverse().join('');
+  return formatted === reversed;
   
 };
