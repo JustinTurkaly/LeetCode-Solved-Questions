@@ -4,33 +4,28 @@
  */
 
 /*
-Input - a string
+Input - a string containing bracket chars
 Output - a boolean representing if the parenthesis are valid
-Constr/Edge - no empty string inputs, s.length of 1 return false;
+Constr/Edge - guaranteed at least a string of length 1, if it is 1 return false
 Plan - 
- - loop thru string
-  - if brackets are opening, push into stack
-  - if brackets are closing, pop off stack and make sure the brackets match
-  - return false if they dont match
-- return stack.length === 0;
+- loop thru string
+  - if its an opening bracket
+    - push the bracket into the stack
+  - if closing bracket, pop off the stack and make sure it matches the closing bracket
+- check if the stack is empty
 */
 var isValid = function(s) {
   const stack = [];
   
   for (let i = 0; i < s.length; i++) {
-    if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
-      stack.push(s[i]);
+    let cur = s[i];
+    if (cur === '(' || cur === '[' || cur === '{') {
+      stack.push(cur);
     } else {
-      let lastEl = stack.pop();
-      if (s[i] === ')' && lastEl !== '(') {
-        return false;
-      }
-      if (s[i] === '}' && lastEl !== '{') {
-        return false;
-      }
-      if (s[i] === ']' && lastEl !== '[') {
-        return false;
-      }
+      let lastVal = stack.pop();
+      if (cur === ')' && lastVal !== '(') return false;
+      if (cur === ']' && lastVal !== '[') return false;
+      if (cur === '}' && lastVal !== '{') return false;
     }
   }
   return stack.length === 0;
