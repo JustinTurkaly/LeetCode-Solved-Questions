@@ -18,9 +18,6 @@ Plan -
 - return -1
 */
 var search = function(nums, target) {
-  if (nums.length === 1 && nums[0] === target) {
-    return 0;
-  }
   let left = 0;
   let right = nums.length - 1;
   
