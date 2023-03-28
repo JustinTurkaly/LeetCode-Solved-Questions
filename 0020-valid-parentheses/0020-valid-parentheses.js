@@ -13,9 +13,18 @@ Plan -
     - push the bracket into the stack
   - if closing bracket, pop off the stack and make sure it matches the closing bracket
 - check if the stack is empty
+
+Time - O(n)
+Space - O(n)
 */
 var isValid = function(s) {
   const stack = [];
+  
+  const parenMap = {
+    '(': ')',
+    '[': ']',
+    '{': '}',
+  }
   
   for (let i = 0; i < s.length; i++) {
     let cur = s[i];
@@ -23,9 +32,8 @@ var isValid = function(s) {
       stack.push(cur);
     } else {
       let lastVal = stack.pop();
-      if (cur === ')' && lastVal !== '(') return false;
-      if (cur === ']' && lastVal !== '[') return false;
-      if (cur === '}' && lastVal !== '{') return false;
+      
+      if (parenMap[lastVal] !== cur) return false;
     }
   }
   return stack.length === 0;
