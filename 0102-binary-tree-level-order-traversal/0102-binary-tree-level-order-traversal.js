@@ -13,33 +13,32 @@
 
 /*
 Input - root of binary tree
-Output - an array representing a level order traversal
-Constr/Edge - empty input return empty array
-Pseudo - 
-1 - handle the edge case
-2 - set result to an empty array and put root in empty queue
-3 - use bfs while loop
-4 - push in a mapped version of the queue into result
-5 - inner while loop decrementing the len
-6 - shift off first node in queue and push its children in to queue
+Output - an array representing the level order traversal
+Constr/Edge - empty input returns itself
+Plan - 
+- init result arr and init queue array with root
+- use bfs to build level arrays
+  - assign cur to queue.shift()
+  - keep track of level size and push into result array when meets limit
+  - check if cur has children and push into queue if true
 */
 var levelOrder = function(root) {
   if (!root) return [];
-  
-  let result = [];
-  let queue = [root];
+  const result = [];
+  const queue = [root];
   
   while (queue.length) {
-    
-    let len = queue.length;
-    result.push(queue.map((node) => node.val));
-    
-    while (len--) {
-      let current = queue.shift();
-      if (current.left) queue.push(current.left);
-      if (current.right) queue.push(current.right);
+    let level = [];
+    let levelSize = queue.length;
+    while (levelSize) {
+      let cur = queue.shift();
+      if (cur.left) queue.push(cur.left);
+      if (cur.right) queue.push(cur.right);
+      
+      level.push(cur.val);
+      levelSize--;
     }
+    result.push(level);
   }
-  
   return result;
 };
