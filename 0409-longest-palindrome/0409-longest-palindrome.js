@@ -25,13 +25,11 @@ var longestPalindrome = function(s) {
     let n = 0;
     if (freqObj[c]) {
       n = freqObj[c];
-      console.log(c, n)
       if (n % 2) {
         count += 2;
       }
-    } 
+    }
     freqObj[c] = n + 1;
-    
   }
   return s.length > count ? count + 1 : count;
 };
